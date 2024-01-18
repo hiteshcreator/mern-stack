@@ -1,16 +1,12 @@
 const express = require("express");
 const app = express();
+const router = require("./router/auth-router");
 
-app.get("/", (req, res) => {
-    res.status(200).send("welcome to mern stack series");
-});
-
-app.get("/register", (req, res) => {
-    res.status(200).send("welcome to register pages");
-});
+app.use("/api/auth",router);
 
 const PORT = 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, (err) => {
+    if (err) console.log("->>",err);
     console.log(`server stared at this Port ${PORT}`);
 });
