@@ -1,19 +1,9 @@
 //Auth router file
 const express = require("express");
 const router  =  express.Router();
+const authcontrollers = require("../controllers/auth-controller");
 
-router.get("/", (req, res) => {
-    res.status(200).send("welcome to mern stack series ?????");
-});
-
-// Another method to call Get & Post Method
-router.route("/next").get((req, res) => {
-    res.status(200).send("another method...");
-});
-
-
-router.route("/register").get((req,res) => {
-    res.status(200).send("welcome to registration page");
-});
+router.route("/").get(authcontrollers.home);
+router.route("/register").get(authcontrollers.register);
 
 module.exports = router;
