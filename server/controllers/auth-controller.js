@@ -1,25 +1,25 @@
 const home = async (req,res) => {
     try{
-        res.status(200).send("welcome in controller");
+        res.status(200).send({message:"welcome in controller"});
     }catch (error){
-        console.log("error",error);
+        res.status(400).send({message:error});
     }
 };
 
 
 const register = async (req,res) => {
     try{
-        res.status(200).send("welcome to registration page controllers");
+        res.status(200).send({message:req.body});
     }catch (error){
-       res.status(400).send("Page is not found!!!");
+       res.status(400).send({message:error});
     }
 }
 
 const dashboard = async (req,res) => {
     try{
-        res.status(200).send("welcome to dashboard");
+        res.status(200).send({message:"welcome to dashboard"});
     }catch (error){
-       res.status(400).send("Page is not found!!!");
+       res.status(400).send({message:error});
     }
 }
 
