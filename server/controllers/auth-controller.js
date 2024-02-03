@@ -41,12 +41,39 @@ const hashPassword = async (password) => {
     res.status(400).send({ message: error });
   }
 };
-const dashboard = async (req, res) => {
+
+// User Login functionality
+const login = async (req, res) => {
   try {
-    res.status(200).send({ message: "welcome to dashboard" });
+    const { email,password } = req.body;
+
+    const userExist = await User.findOne({email});
+    
+    console.log("login--",userExist);
+
+    if(!userExist){
+      return res.status(400).json({messsage:"Invalid Credentials"})
+    }
+
+    // Validate the password
+    const user = await bcrypt.compare(password
+    ,userExist.password);
+
+    if(user){
+
+      res.status(200).json({
+        msg:"Login Successful",
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString()
+      });
+
+    }else{
+      res.status(401).json({ message: "Invalid email or password" });
+    }
+
   } catch (error) {
     res.status(400).send({ message: error });
   }
 };
 
-module.exports = { home, register, dashboard };
+module.exports = { home, register, login };
