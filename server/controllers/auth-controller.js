@@ -9,6 +9,7 @@ const home = async (req, res) => {
   }
 };
 
+// register function
 const register = async (req, res) => {
   try {
     const { username, email, password, phone } = req.body;
