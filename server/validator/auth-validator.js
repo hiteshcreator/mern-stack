@@ -25,4 +25,20 @@ const singupSchema = z.object({
         .max(1024,{message: "Name must not be more than 255 characters"}),    
 });
 
-module.exports = singupSchema;
+const loginSchema = z.object({
+    email: z
+    .string({required_error: "Email is required"})
+    .trim()
+    .email({message: "Invalid email address"})
+    .min(3, {message: "Email must  address"})
+    .max(255,{message: "Email must not be more than 255 characters"}),
+
+    password: z
+    .string({required_error: "Password is required"})
+    .trim()
+    .min(7, {message: "password must be at lest of 6 chars."})
+    .max(1024,{message: "Name must not be more than 255 characters"}),
+
+});
+
+module.exports = {singupSchema,loginSchema};
