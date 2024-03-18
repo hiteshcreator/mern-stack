@@ -1,7 +1,8 @@
 process.loadEnvFile()
 const express = require("express");
 const app = express();
-const router = require("./router/auth-router");
+const authRoute = require("./router/auth-router");
+const contactRoute = require("./router/contact-router");
 const bodyParser = require('body-parser');
 const connectDb  = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
@@ -16,7 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // error middleware config in all app
-app.use("/api/auth",router);
+app.use("/api/auth",authRoute);
+app.use("/api/form",contactRoute);
 
 app.use(errorMiddleware);
 
